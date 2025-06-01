@@ -2,147 +2,177 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <title>MEGA CASH</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyStake</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Bebas Neue', sans-serif;
-      background: linear-gradient(#0f001f, #000);
-      color: white;
-      text-align: center;
+      font-family: 'Arial', sans-serif;
+      background: radial-gradient(circle at top, #003300, #000000);
+      color: #fff;
       min-height: 100vh;
+      padding: 20px 0;
+      overflow-x: hidden;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 0 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 20px;
+      align-items: center;
+      text-align: center;
     }
 
-    .container {
-      max-width: 380px;
-      width: 100%;
-      margin: 0 auto;
-      background: #1c0033;
-      padding: 25px 20px;
-      border-radius: 20px;
-      border: 2px solid #ff00ff;
-      box-shadow: 0 0 20px #ff00ff80;
+    .timer {
+      font-size: 22px;
+      font-weight: bold;
+      background-color: #00ff99;
+      color: #000;
+      padding: 10px 18px;
+      border-radius: 30px;
+      margin-bottom: 14px;
+      animation: pulse 1.5s infinite;
     }
 
-    .icon {
-      font-size: 3rem;
+    .offer {
+      font-size: 26px;
+      color: #00ff99;
+      font-weight: bold;
       margin-bottom: 10px;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      color: #ffcc00;
-      margin-bottom: 10px;
+      animation: flash 2s infinite;
     }
 
     .bonus {
-      background: #ff0066;
+      background: linear-gradient(to right, #00ff99, #00cc66);
+      color: #000;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 22px;
+      animation: bounceIn 1.5s;
+    }
+
+    .logo {
+      font-size: 34px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .logo span:first-child {
+      color: #00bfff;
+    }
+
+    .logo span:last-child {
       color: white;
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      margin: 15px 0;
-      animation: pulse 2s infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 8px #ff0066; }
-      50% { box-shadow: 0 0 20px #ff0066; }
-    }
-
-    .countdown {
-      font-size: 1rem;
-      color: #ffcc00;
-      margin-bottom: 15px;
+    .instruction {
+      font-size: 16px;
+      margin-bottom: 14px;
+      color: #ccc;
     }
 
     input {
       width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 2px solid #9900ff;
-      background-color: #290050;
-      color: white;
-      font-size: 1rem;
-      margin-bottom: 15px;
-      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      margin-bottom: 18px;
     }
 
-    button {
-      width: 100%;
-      padding: 15px;
-      font-size: 1.1rem;
-      background: linear-gradient(90deg, #25d366, #128c7e);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
+    .whatsapp-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      transition: background 0.2s ease;
+      background-color: #00ff99;
+      color: #000;
+      font-size: 20px;
+      padding: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      width: 100%;
+      box-shadow: 0 0 10px #00ff99;
+      transition: transform 0.3s ease;
     }
 
-    button:hover {
-      background: #25d366;
+    .whatsapp-btn:hover {
+      transform: scale(1.03);
     }
 
-    .footer {
-      font-size: 0.75rem;
-      color: #888;
-      margin-top: 25px;
+    .whatsapp-btn img {
+      width: 26px;
+      height: 26px;
+      margin-right: 10px;
+    }
+
+    footer {
+      font-size: 12px;
+      color: #666;
+      margin-top: 40px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
+  <div class="wrapper">
+    <div class="timer">⏳ ¡OFERTA EXPIRA EN <span id="countdown">05:00</span>!</div>
+    <div class="offer">🔥 ¡BONIFICACIÓN EXCLUSIVA DEL 20% HOY! 🔥</div>
+    <div class="bonus">+20% extra en tu primer depósito</div>
 
-  <div class="container">
-    <div class="icon">🎰</div>
-    <h1>MEGA CASH</h1>
-    <div class="bonus">🎁 ¡20% DE BONIFICACIÓN SOLO HOY!</div>
-    <div class="countdown">⏳ Oferta expira en: <span id="timer">04:59</span></div>
+    <div class="logo"><span>My</span><span>Stake</span></div>
+    <div class="instruction">Escribí tu nombre para reclamar el bono:</div>
+    <input type="text" id="nombre" placeholder="Tu nombre">
+    <a id="whatsappLink" class="whatsapp-btn" href="#" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      ¡Reclamar 20%!
+    </a>
 
-    <p>🔥 Escribí tu nombre y reclamá tu usuario 🔥</p>
-
-    <form id="form">
-      <input type="text" id="name" placeholder="Tu nombre" required />
-      <button type="submit">¡Quiero mi 20%! 📲</button>
-    </form>
+    <footer>© MYSTAKE CASINO 2025</footer>
   </div>
 
-  <div class="footer">© Mega Cash Casino 2025</div>
-
   <script>
-    // Timer countdown de 5 minutos
-    let time = 300;
-    const timerEl = document.getElementById("timer");
-    const interval = setInterval(() => {
-      const minutes = String(Math.floor(time / 60)).padStart(2, '0');
-      const seconds = String(time % 60).padStart(2, '0');
-      timerEl.textContent = `${minutes}:${seconds}`;
-      if (time > 0) time--;
+    let tiempo = 300;
+    const countdown = document.getElementById("countdown");
+    const timer = setInterval(() => {
+      const minutos = String(Math.floor(tiempo / 60)).padStart(2, '0');
+      const segundos = String(tiempo % 60).padStart(2, '0');
+      countdown.textContent = `${minutos}:${segundos}`;
+      tiempo--;
+      if (tiempo < 0) clearInterval(timer);
     }, 1000);
 
-    // Redirección a WhatsApp con mensaje personalizado
-    document.getElementById("form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      if (!name) return alert("Por favor, escribí tu nombre.");
-      const msg = `Hola, quiero registrarme como ${name} y aprovechar la bonificación del 20%.`;
-      const link = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-      window.open(link, "_blank");
+    const nombreInput = document.getElementById('nombre');
+    const whatsappLink = document.getElementById('whatsappLink');
+    nombreInput.addEventListener('input', () => {
+      const nombre = encodeURIComponent(nombreInput.value.trim());
+      const mensaje = `¡Hola! Quiero reclamar mi bonificación del 20%. Mi nombre es ${nombre}`;
+      const numero = '5491123456789'; // Cambiar por tu número real
+      whatsappLink.href = `https://wa.me/${numero}?text=${mensaje}`;
     });
   </script>
-
 </body>
 </html>
