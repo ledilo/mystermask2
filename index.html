@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>MEGA CASH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Bebas Neue', sans-serif;
+      background: linear-gradient(#0f001f, #000);
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 380px;
+      width: 100%;
+      margin: 0 auto;
+      background: #1c0033;
+      padding: 25px 20px;
+      border-radius: 20px;
+      border: 2px solid #ff00ff;
+      box-shadow: 0 0 20px #ff00ff80;
+    }
+
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+
+    .bonus {
+      background: #ff0066;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      margin: 15px 0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 8px #ff0066; }
+      50% { box-shadow: 0 0 20px #ff0066; }
+    }
+
+    .countdown {
+      font-size: 1rem;
+      color: #ffcc00;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid #9900ff;
+      background-color: #290050;
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+      background: linear-gradient(90deg, #25d366, #128c7e);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #25d366;
+    }
+
+    .footer {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="icon">🎰</div>
+    <h1>MEGA CASH</h1>
+    <div class="bonus">🎁 ¡20% DE BONIFICACIÓN SOLO HOY!</div>
+    <div class="countdown">⏳ Oferta expira en: <span id="timer">04:59</span></div>
+
+    <p>🔥 Escribí tu nombre y reclamá tu usuario 🔥</p>
+
+    <form id="form">
+      <input type="text" id="name" placeholder="Tu nombre" required />
+      <button type="submit">¡Quiero mi 20%! 📲</button>
+    </form>
+  </div>
+
+  <div class="footer">© Mega Cash Casino 2025</div>
+
+  <script>
+    // Timer countdown de 5 minutos
+    let time = 300;
+    const timerEl = document.getElementById("timer");
+    const interval = setInterval(() => {
+      const minutes = String(Math.floor(time / 60)).padStart(2, '0');
+      const seconds = String(time % 60).padStart(2, '0');
+      timerEl.textContent = `${minutes}:${seconds}`;
+      if (time > 0) time--;
+    }, 1000);
+
+    // Redirección a WhatsApp con mensaje personalizado
+    document.getElementById("form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      if (!name) return alert("Por favor, escribí tu nombre.");
+      const msg = `Hola, quiero registrarme como ${name} y aprovechar la bonificación del 20%.`;
+      const link = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(link, "_blank");
+    });
+  </script>
+
+</body>
+</html>
