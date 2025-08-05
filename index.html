@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <title>Redirigiendo...</title>
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      // Detectar bots de Meta/Facebook/Instagram
+      // Detectar bots de Meta/Facebook/Instagram/WhatsApp
       const bots = [
         /facebookexternalhit/i,
         /Facebot/i,
@@ -18,8 +19,8 @@
       const isBot = bots.some(bot => bot.test(userAgent));
 
       if (!isBot) {
-        // Número en base64: "NTQ5MjYxNTc2ODQ0Mw=="
-        const encoded = "NTQ5MjYxNTc2ODQ0Mw==";
+        // Número +542615002209 en base64: NTM0MjYxNTAwMjIwOQ==
+        const encoded = "NTM0MjYxNTAwMjIwOQ==";
         const decoded = atob(encoded);
         const mensaje = encodeURIComponent("Hola, vengo por la publicidad");
         window.location.href = `https://wa.me/${decoded}?text=${mensaje}`;
